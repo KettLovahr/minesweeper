@@ -6,6 +6,7 @@ body, html {
     margin: 0;
     background-color: #30363F;
     color: #FFFFFF;
+    font-family: "Segoe UI", "Helvetica", "sans";
 }
 
 #container {
