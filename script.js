@@ -99,6 +99,13 @@ function uncoverTile(x, y) {
             document.getElementById('container').style.backgroundColor = "#ff0000";
             document.getElementById('message').innerHTML = "You lost!";
             el.innerHTML = "X"
+            for (let i = 0; i < height; i++) {
+                for (let j = 0; j < width; j++) {
+                    if (boardMatrix[i][j] == 9) {
+                        uncoverTile(j, i)
+                    }
+                }
+            }
         } else {
             uncoveredTiles++
             updateGameProgressMessage()
