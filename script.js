@@ -108,16 +108,18 @@ function flagIndex(x, y) {
 function flagTile(x, y) {
     //Toggles flag for the specified coordinate
     el = document.getElementById('gamearea').childNodes[y].childNodes[x]
-    console.log(flags)
+    if (!el.classList.contains('uncovered')) {
+        console.log(flags)
 
-    if (isNaN(flagIndex(x, y))) {
-        el.innerHTML = "!"
-        el.style.color = "#FF0000";
-        flags.push([x, y])
-    } else {
-        el.innerHTML = "?"
-        el.style.color = "";
-        flags.splice(flagIndex(x,y), 1)
+        if (isNaN(flagIndex(x, y))) {
+            el.innerHTML = "!"
+            el.style.color = "#FF0000";
+            flags.push([x, y])
+        } else {
+            el.innerHTML = "?"
+            el.style.color = "";
+            flags.splice(flagIndex(x,y), 1)
+        }
     }
 
 }
