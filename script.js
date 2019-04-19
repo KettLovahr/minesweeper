@@ -97,7 +97,6 @@ function flagIndex(x, y) {
     if (flags.length > 0) {
         for (let i = 0; i < flags.length; i++) {
             if (flags[i][0] == x && flags[i][1] == y) {
-                console.log("True")
                 return i
             }
         }
@@ -109,8 +108,6 @@ function flagTile(x, y) {
     //Toggles flag for the specified coordinate
     el = document.getElementById('gamearea').childNodes[y].childNodes[x]
     if (!el.classList.contains('uncovered')) {
-        console.log(flags)
-
         if (isNaN(flagIndex(x, y))) {
             el.innerHTML = "!"
             el.style.color = "#FF0000";
