@@ -6,9 +6,11 @@ var uncoveredTiles = 0;
 var alive = true;
 var victory = false;
 var boardMatrix = []
+var flags = []
 
 function buildGame() {
-
+    //Builds both the visual elements and the matrix that stores board information
+    //Also inserts the events for each cell of the board
     let area = document.getElementById('gamearea')
     uncoveredTiles = 0;
     alive = true;
@@ -33,7 +35,15 @@ function buildGame() {
             new_row.appendChild(new_tile)
             new_tile.onclick = function() {
                 if (alive && !victory) {
-                    uncoverTile(j, i)
+                    if (isNaN(flagIndex(j, i))){
+                        uncoverTile(j, i)
+                    }
+                }
+            }
+            new_tile.oncontextmenu = function(e) {
+                e.preventDefault();
+                if (alive && !victory) {
+                    flagTile(j, i)
                 }
             }
             boardMatrix[i].push(0)
@@ -43,6 +53,7 @@ function buildGame() {
 }
 
 function placeMines() {
+    //Places mines by randomly picking coordinates within the matrix
     let placedMines = 0;
     while (placedMines < mines) {
         let tryX = Math.floor(Math.random()*height)
@@ -56,6 +67,8 @@ function placeMines() {
 }
 
 function calcNeighbors() {
+    //Calculates how many neighboring tiles of each cell are mines
+    //if the current cell is a mine, it's skipped
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             if (boardMatrix[i][j] != 9) {
@@ -76,7 +89,43 @@ function calcNeighbors() {
     updateGameProgressMessage()
 }
 
+function flagIndex(x, y) {
+    //Returns the index of the flag if the specified coordinates
+    //are those of a flag
+    //Otherwise returns NaN
+    if (flags.length > 0) {
+        for (let i = 0; i < flags.length; i++) {
+            if (flags[i][0] == x && flags[i][1] == y) {
+                console.log("True")
+                return i
+            }
+        }
+    }
+    return NaN
+}
+
+function flagTile(x, y) {
+    //Toggles flag for the specified coordinate
+    el = document.getElementById('gamearea').childNodes[y].childNodes[x]
+    console.log(flags)
+
+    if (isNaN(flagIndex(x, y))) {
+        el.innerHTML = "!"
+        el.style.color = "#FF0000";
+        flags.push([x, y])
+    } else {
+        el.innerHTML = "?"
+        el.style.color = "";
+        flags.splice(flagIndex(x,y), 1)
+    }
+
+}
+
 function uncoverTile(x, y) {
+    //Responsible for revealing the value of a cell to the player
+    //as well as setting victory or defeat states depending on
+    //the cell that has been clicked
+    //This is an absolute mess and I deeply apologize.
     el = document.getElementById('gamearea').childNodes[y].childNodes[x]
     if (!el.classList.contains('uncovered')) {
         el.classList.add('uncovered')
@@ -120,6 +169,10 @@ function uncoverTile(x, y) {
 }
 
 function discover(x, y) {
+    //Usually called when the player uncovers a cell with no
+    //neighboring tiles.
+    //This reveals all neighboring tiles to a cell, regardless
+    //of whether they actually contain mines
     for (let ii = -1; ii <= 1; ii++) {
         for (let jj = -1; jj <= 1; jj++) {
             if (x+ii >= 0 && y + jj >= 0) {
