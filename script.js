@@ -137,7 +137,10 @@ function uncoverTile(x, y) {
             case 2: el.style.backgroundColor = "#007f00"; break;
             case 3: el.style.backgroundColor = "#007f7f"; break;
             case 4: el.style.backgroundColor = "#7f0000"; break;
-            case 9: el.style.backgroundColor = "#FF0000"; break;
+            case 9:
+                el.style.backgroundColor = (isNaN(flagIndex(x, y)) && !victory) ? "#FF0000" : "#000000";
+                el.style.color = (isNaN(flagIndex(x, y)) && !victory) ? "#FFFFFF" : "#00fc1c";
+                break;
             default: el.style.backgroundColor = "#00a2e8"; break;
         }
         if (boardMatrix[y][x] == 0) {
@@ -147,7 +150,7 @@ function uncoverTile(x, y) {
             alive = false
             document.getElementById('container').style.backgroundColor = "#ff0000";
             document.getElementById('message').innerHTML = "You lost!";
-            el.innerHTML = "X"
+            el.innerHTML = (isNaN(flagIndex(x, y)) && !victory) ? "X" : "!"
             for (let i = 0; i < height; i++) {
                 for (let j = 0; j < width; j++) {
                     if (boardMatrix[i][j] == 9) {
@@ -163,6 +166,13 @@ function uncoverTile(x, y) {
                 victory = true;
                 document.getElementById('container').style.backgroundColor = "#00fc1c";
                 document.getElementById('message').innerHTML = "You won!";
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < width; j++) {
+                        if (boardMatrix[i][j] == 9) {
+                            uncoverTile(j, i)
+                        }
+                    }
+                }
             }
         }
     }
