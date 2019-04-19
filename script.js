@@ -16,6 +16,7 @@ function buildGame() {
     alive = true;
     victory = false;
     boardMatrix = []
+    flags = []
     document.getElementById('container').style.backgroundColor = "";
     document.getElementById('message').innerHTML = "Minesweeper";
 
