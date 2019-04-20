@@ -148,8 +148,10 @@ function uncoverTile(x, y) {
         }
         if (boardMatrix[y][x] == 9) {
             alive = false
-            document.getElementById('container').style.backgroundColor = "#ff0000";
-            document.getElementById('message').innerHTML = "You lost!";
+            if (!victory) {
+                document.getElementById('container').style.backgroundColor = "#ff0000";
+                document.getElementById('message').innerHTML = "You lost!";
+            }
             el.innerHTML = (isNaN(flagIndex(x, y)) && !victory) ? "X" : "!"
             for (let i = 0; i < height; i++) {
                 for (let j = 0; j < width; j++) {
