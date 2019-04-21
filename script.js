@@ -218,14 +218,14 @@ document.getElementById('newgame2').onclick = function() {
 document.getElementById('newgame3').onclick = function() {
     width = 25
     height = 20
-    mines = 80
+    mines = 40
     buildGame();
 }
 
 document.getElementById('newgame4').onclick = function() {
     width = 30
     height = 20
-    mines = 100
+    mines = 80
     buildGame();
 }
 
