@@ -253,14 +253,17 @@ document.getElementById('resetcustom').onclick = function() {
 }
 
 document.getElementById('newgamecustom').onclick = function() {
-    width = document.getElementById('customwidth').value
-    height = document.getElementById('customheight').value
-    mines = document.getElementById('custommines').value
-    if (width * height > mines) {
+    new_width = document.getElementById('customwidth').value
+    new_height = document.getElementById('customheight').value
+    new_mines = document.getElementById('custommines').value
+    if (new_width * new_height > new_mines) {
+        width = new_width
+        height = new_height
+        mines = new_mines
         buildGame();
         toggleCustomGameMenu()
     } else {
-        if (mines > width * height) {
+        if (new_mines > new_width * new_height) {
             alert("You want a game with " + mines + " mines, but there are only " + (width * height) + " tiles. Try again.")
         } else {
             alert("You want a game with " + mines + " mines, that's the same amount of tiles you'd get, making the game impossible. Try again.")
