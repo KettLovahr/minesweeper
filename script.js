@@ -200,6 +200,15 @@ function updateGameProgressMessage() {
     document.getElementById('numtiles').innerHTML = uncoveredTiles + "/" + ((width*height)-mines);
 }
 
+function toggleCustomGameMenu() {
+    let menu_custom = document.getElementById('customgamemenu')
+    if (menu_custom.style.display == "") {
+        menu_custom.style.display = "block"
+    } else {
+        menu_custom.style.display = ""
+    }
+}
+
 
 document.getElementById('newgame1').onclick = function() {
     width = 10
@@ -227,6 +236,36 @@ document.getElementById('newgame4').onclick = function() {
     height = 20
     mines = 80
     buildGame();
+}
+
+document.getElementById('restartgame').onclick = function() {
+    buildGame();
+}
+
+document.getElementById('customgame').onclick = function() {
+    toggleCustomGameMenu()
+}
+
+document.getElementById('resetcustom').onclick = function() {
+    document.getElementById('customwidth').value = 10
+    document.getElementById('customheight').value = 10
+    document.getElementById('custommines').value = 10
+}
+
+document.getElementById('newgamecustom').onclick = function() {
+    width = document.getElementById('customwidth').value
+    height = document.getElementById('customheight').value
+    mines = document.getElementById('custommines').value
+    if (width * height > mines) {
+        buildGame();
+        toggleCustomGameMenu()
+    } else {
+        if (mines > width * height) {
+            alert("You want a game with " + mines + " mines, but there are only " + (width * height) + " tiles. Try again.")
+        } else {
+            alert("You want a game with " + mines + " mines, that's the same amount of tiles you'd get, making the game impossible. Try again.")
+        }
+    }
 }
 
 

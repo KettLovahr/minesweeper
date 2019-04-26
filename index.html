@@ -7,18 +7,33 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id="toosmall">This display might be too small to play on.</div>
         <div id="container">
             <p id="message">Minesweeper</p>
             <div class="menu">
-                <div class="button" id="newgame1">Easy</div>
-                <div class="button" id="newgame2">Medium</div>
-                <div class="button" id="newgame3">Difficult</div>
-                <div class="button" id="newgame4">Professional</div>
+                <div class="menu_standard">
+                    <div class="button" id="newgame1">Easy</div>
+                    <div class="button" id="newgame2">Medium</div>
+                    <div class="button" id="newgame3">Difficult</div>
+                    <div class="button" id="newgame4">Professional</div>
+                    <div class="button" id="customgame">Custom...</div>
+                    <div class="button" id="restartgame">Restart</div>
+                </div>
             </div>
             <p>Safe tiles found: <span id="numtiles">0</span></p>
         <div id="gamearea"></div>
         </div>
+
+        <div class="menu" id="customgamemenu">
+            <p>Custom game menu</p>
+            <div class="menu_custom">
+                <div class="button">Width</div> <input id="customwidth" type="number" min="5" max="100" value="10" size="1">
+                <div class="button">Height</div> <input id="customheight" type="number" min="5" max="100" value="10" size="1">
+                <div class="button">Mines</div> <input id="custommines" type="number" min="5" max="500" value="10" size="1">
+                <div class="button startbutton" id="newgamecustom">Start</div> <div class="button" id="resetcustom">Reset Values</div>
+            </div>
+            <div class="button" onclick="toggleCustomGameMenu()">Close</div>
+        </div>
+
         <script src="./script.js"></script>
     </body>
 </html>
