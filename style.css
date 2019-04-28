@@ -62,10 +62,9 @@ body, html {
     background-color: #111316;
 }
 
-#customgamemenu {
+#gamemenu {
     display: none;
     width: 50vw;
-    height: 50vh;
     position: absolute;
     text-align: center;
     padding: 32px;
@@ -76,8 +75,19 @@ body, html {
     box-shadow: 0px 0px 16px #0000007f;
 }
 
-#customgamemenu > p {
+#gamemenu > p {
     font-size: 24px;
+    margin: 16px;
+}
+
+#gamemenu > h1 {
+    margin: 0;
+}
+
+hr {
+    background-color: #10161f;
+    border: none;
+    height: 1px;
 }
 
 .menu_custom {
@@ -87,8 +97,13 @@ body, html {
 
 .menu_standard {
     display: grid;
-    margin-top: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#topbar {
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: 16px;
 }
 
 .button {
@@ -117,12 +132,16 @@ input[type=number] {
     background-color: #33363c;
 }
 
+.button:active, input[type=number]:focus {
+    background-color: #111316;
+}
+
 .startbutton {
     color: #00fc1c;
 }
 
 @media only screen and (max-width: 768px) {
-    #container, #customgamemenu {
+    #container, #gamemenu {
         width: 100%;
     }
 }

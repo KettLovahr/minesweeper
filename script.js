@@ -201,7 +201,7 @@ function updateGameProgressMessage() {
 }
 
 function toggleCustomGameMenu() {
-    let menu_custom = document.getElementById('customgamemenu')
+    let menu_custom = document.getElementById('gamemenu')
     if (menu_custom.style.display == "") {
         menu_custom.style.display = "block"
     } else {
