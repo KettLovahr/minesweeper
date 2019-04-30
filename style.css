@@ -27,6 +27,7 @@ body, html {
     width: 100%;
     max-width: 100vw;
     white-space: nowrap;
+    overflow: auto;
 }
 
 #message {
@@ -143,5 +144,13 @@ input[type=number] {
 @media only screen and (max-width: 768px) {
     #container, #gamemenu {
         width: 100%;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    #container {
+        position: static;
+        min-height: 100vh;
+        transform: none;
     }
 }
