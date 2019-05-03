@@ -256,19 +256,21 @@ document.getElementById('newgamecustom').onclick = function() {
     new_width = document.getElementById('customwidth').value
     new_height = document.getElementById('customheight').value
     new_mines = document.getElementById('custommines').value
-    if (new_width * new_height > new_mines) {
-        width = new_width
-        height = new_height
-        mines = new_mines
-        buildGame();
-        toggleCustomGameMenu()
-    } else {
-        if (new_mines > new_width * new_height) {
-            alert("You want a game with " + mines + " mines, but there are only " + (width * height) + " tiles. Try again.")
+    if (new_width <= 50 && new_height <= 50 && new_mines <= 500) {
+        if (new_width * new_height > new_mines) {
+            width = new_width
+            height = new_height
+            mines = new_mines
+            buildGame();
+            toggleCustomGameMenu()
         } else {
-            alert("You want a game with " + mines + " mines, that's the same amount of tiles you'd get, making the game impossible. Try again.")
+            if (new_mines > new_width * new_height) {
+                alert("You want a game with " + mines + " mines, but there are only " + (width * height) + " tiles. Try again.")
+            } else {
+                alert("You want a game with " + mines + " mines, that's the same amount of tiles you'd get, making the game impossible. Try again.")
+            }
         }
-    }
+    } 
 }
 
 
