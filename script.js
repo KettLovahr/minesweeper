@@ -2,16 +2,20 @@ var width = 10
 var height = 10
 var mines = 10
 
+var time = 0
 var uncoveredTiles = 0;
 var alive = true;
 var victory = false;
 var boardMatrix = []
 var flags = []
 
+var game_loop_timer = setInterval(function() {gameLoop()}, 1000/60)
+
 function buildGame() {
     //Builds both the visual elements and the matrix that stores board information
     //Also inserts the events for each cell of the board
     let area = document.getElementById('gamearea')
+    time = 0
     uncoveredTiles = 0;
     alive = true;
     victory = false;
@@ -87,7 +91,6 @@ function calcNeighbors() {
             }
         }
     }
-    updateGameProgressMessage()
 }
 
 function flagIndex(x, y) {
@@ -197,7 +200,7 @@ function discover(x, y) {
 }
 
 function updateGameProgressMessage() {
-    document.getElementById('numtiles').innerHTML = uncoveredTiles + "/" + ((width*height)-mines);
+    document.getElementById('numtiles').innerHTML = uncoveredTiles + "/" + ((width*height)-mines) + "<br>" + time.toFixed(1);
 }
 
 function toggleCustomGameMenu() {
@@ -209,6 +212,12 @@ function toggleCustomGameMenu() {
     }
 }
 
+function gameLoop() {
+    if (alive && !victory && uncoveredTiles > 0) {
+        time += 1/60;
+    }
+    updateGameProgressMessage()
+}
 
 document.getElementById('newgame1').onclick = function() {
     width = 10
@@ -270,7 +279,7 @@ document.getElementById('newgamecustom').onclick = function() {
                 alert("You want a game with " + mines + " mines, that's the same amount of tiles you'd get, making the game impossible. Try again.")
             }
         }
-    } 
+    }
 }
 
 
