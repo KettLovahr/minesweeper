@@ -59,6 +59,7 @@ function buildGame() {
 
 function placeMines() {
     //Places mines by randomly picking coordinates within the matrix
+
     let placedMines = 0;
     while (placedMines < mines) {
         let tryX = Math.floor(Math.random()*height)
@@ -141,8 +142,22 @@ function uncoverTile(x, y) {
             case 3: el.style.backgroundColor = "#007f7f"; break;
             case 4: el.style.backgroundColor = "#7f0000"; break;
             case 9:
-                el.style.backgroundColor = (isNaN(flagIndex(x, y)) && !victory) ? "#FF0000" : "#000000";
-                el.style.color = (isNaN(flagIndex(x, y)) && !victory) ? "#FFFFFF" : "#00fc1c";
+                if (uncoveredTiles == 0) { //Don't let the player die on their first click
+                    boardMatrix[y][x] = 0;
+                    let tryX = Math.floor(Math.random()*height)
+                    let tryY = Math.floor(Math.random()*width)
+                    if (boardMatrix[tryX][tryY] != 9) {
+                        boardMatrix[tryX][tryY] = 9
+                    }
+                    calcNeighbors();
+                    el.classList.remove('uncovered')
+                    uncoverTile(x, y);
+                    console.log("That was gonna be bad.")
+                }
+                else {
+                    el.style.backgroundColor = (isNaN(flagIndex(x, y)) && !victory) ? "#FF0000" : "#000000";
+                    el.style.color = (isNaN(flagIndex(x, y)) && !victory) ? "#FFFFFF" : "#00fc1c";
+                }
                 break;
             default: el.style.backgroundColor = "#00a2e8"; break;
         }
