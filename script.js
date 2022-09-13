@@ -78,6 +78,7 @@ function calcNeighbors() {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             if (boardMatrix[i][j] != 9) {
+                boardMatrix[i][j] = 0;
                 for (let ii = -1; ii <= 1; ii++) {
                     for (let jj = -1; jj <= 1; jj++) {
                         if (i+ii >= 0 && j + jj >= 0) {
