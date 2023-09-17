@@ -145,15 +145,19 @@ function uncoverTile(x, y) {
             case 9:
                 if (uncoveredTiles == 0) { //Don't let the player die on their first click
                     boardMatrix[y][x] = 0;
-                    let tryX = Math.floor(Math.random()*height)
-                    let tryY = Math.floor(Math.random()*width)
-                    if (boardMatrix[tryX][tryY] != 9) {
-                        boardMatrix[tryX][tryY] = 9
+                    let moved = false;
+                    while (!moved) {
+                        let tryX = Math.floor(Math.random()*height)
+                        let tryY = Math.floor(Math.random()*width)
+                        if (boardMatrix[tryX][tryY] != 9) {
+                            boardMatrix[tryX][tryY] = 9
+                            moved = true;
+                        }
                     }
                     calcNeighbors();
                     el.classList.remove('uncovered')
-                    uncoverTile(x, y);
-                    console.log("That was gonna be bad.")
+                    uncoveredTiles--
+                    uncoverTile(x, y)
                 }
                 else {
                     el.style.backgroundColor = (isNaN(flagIndex(x, y)) && !victory) ? "#FF0000" : "#000000";
